@@ -8,5 +8,7 @@ pub mod d03; // delivery directions
 pub mod d04; // md5 hashes
 pub mod d05; // nice strings
 pub mod d06; // million light grid
+pub mod d07; // bitwise logic gates
+pub mod d08; // code vs string length
 
 aoc_lib! { year = 2015 }

@@ -1,7 +1,6 @@
 use md5;
 
 fn find_salt(secret_key: &str, starts_with: &str) -> i32 {
-
     let mut i = 0;
     loop {
         let data = format!("{}{}", secret_key, i);

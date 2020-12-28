@@ -1,5 +1,3 @@
-use std::cmp::min;
-
 #[derive(Debug)]
 pub struct Gift {
     l: i32,
@@ -28,9 +26,13 @@ impl Gift {
     }
 
     fn calculate_ribbon(&self) -> i32 {
-        let perimeters = vec![2*(self.l + self.w), 2*(self.w+self.h), 2*(self.h+self.l)];
+        let perimeters = vec![
+            2 * (self.l + self.w),
+            2 * (self.w + self.h),
+            2 * (self.h + self.l),
+        ];
         let min_perimeter = perimeters.iter().min().unwrap();
-        let bow = self.l*self.w*self.h;
+        let bow = self.l * self.w * self.h;
         min_perimeter + bow
     }
 }

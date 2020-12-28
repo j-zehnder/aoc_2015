@@ -45,7 +45,7 @@ pub fn part1(directions: &[Direction]) -> usize {
             Direction::Left => x -= 1,
             Direction::Right => x += 1,
         }
-        visited.insert(Coord {x, y});
+        visited.insert(Coord { x, y });
     }
 
     visited.len()
@@ -67,7 +67,7 @@ pub fn part2(directions: &[Direction]) -> usize {
             Direction::Left => x -= 1,
             Direction::Right => x += 1,
         }
-        visited.insert(Coord {x, y});
+        visited.insert(Coord { x, y });
     });
 
     // robot
@@ -80,7 +80,7 @@ pub fn part2(directions: &[Direction]) -> usize {
             Direction::Left => x -= 1,
             Direction::Right => x += 1,
         }
-        visited.insert(Coord {x, y});
+        visited.insert(Coord { x, y });
     });
 
     visited.len()
