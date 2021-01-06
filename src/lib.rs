@@ -15,5 +15,6 @@ pub mod d06; // million light grid
 pub mod d07; // bitwise logic gates
 pub mod d08; // code vs string length
 pub mod d09; // tsp
+pub mod d13; // optimal seating arrangement
 
 aoc_lib! { year = 2015 }
