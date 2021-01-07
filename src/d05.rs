@@ -7,16 +7,16 @@ fn is_nice_p1(line: &str) -> bool {
     }
 
     //   contains at least 3 of aeiou
-    let vowel_count = line.matches("a").count()
-        + line.matches("e").count()
-        + line.matches("i").count()
-        + line.matches("o").count()
-        + line.matches("u").count();
+    let vowel_count = line.matches('a').count()
+        + line.matches('e').count()
+        + line.matches('i').count()
+        + line.matches('o').count()
+        + line.matches('u').count();
 
     //   contains at least 1 double letter
     let re = Regex::new(r"(.)\1").unwrap();
 
-    return vowel_count >= 3 && re.is_match(line).unwrap();
+    vowel_count >= 3 && re.is_match(line).unwrap()
 }
 
 fn is_nice_p2(line: &str) -> bool {

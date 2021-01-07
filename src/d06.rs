@@ -6,19 +6,19 @@ pub enum LightInstruction {
 
 impl LightInstruction {
     fn from_str(s: &str) -> Self {
-        let split = s.split(" ").collect::<Vec<&str>>();
+        let split = s.split(' ').collect::<Vec<&str>>();
 
         if split.get(0).unwrap() == &"toggle" {
             let c1 = split.get(1).unwrap();
             let x1 = c1
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(0)
                 .unwrap()
                 .parse::<usize>()
                 .unwrap();
             let y1 = c1
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(1)
                 .unwrap()
@@ -27,14 +27,14 @@ impl LightInstruction {
 
             let c2 = split.get(3).unwrap();
             let x2 = c2
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(0)
                 .unwrap()
                 .parse::<usize>()
                 .unwrap();
             let y2 = c2
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(1)
                 .unwrap()
@@ -45,14 +45,14 @@ impl LightInstruction {
         } else if split.get(1).unwrap() == &"on" {
             let c1 = split.get(2).unwrap();
             let x1 = c1
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(0)
                 .unwrap()
                 .parse::<usize>()
                 .unwrap();
             let y1 = c1
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(1)
                 .unwrap()
@@ -61,14 +61,14 @@ impl LightInstruction {
 
             let c2 = split.get(4).unwrap();
             let x2 = c2
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(0)
                 .unwrap()
                 .parse::<usize>()
                 .unwrap();
             let y2 = c2
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(1)
                 .unwrap()
@@ -79,14 +79,14 @@ impl LightInstruction {
         } else if split.get(1).unwrap() == &"off" {
             let c1 = split.get(2).unwrap();
             let x1 = c1
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(0)
                 .unwrap()
                 .parse::<usize>()
                 .unwrap();
             let y1 = c1
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(1)
                 .unwrap()
@@ -95,14 +95,14 @@ impl LightInstruction {
 
             let c2 = split.get(4).unwrap();
             let x2 = c2
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(0)
                 .unwrap()
                 .parse::<usize>()
                 .unwrap();
             let y2 = c2
-                .split(",")
+                .split(',')
                 .collect::<Vec<&str>>()
                 .get(1)
                 .unwrap()
@@ -117,34 +117,34 @@ impl LightInstruction {
 }
 
 fn turn_off(lights: &mut [[bool; 1000]; 1000], x1: usize, y1: usize, x2: usize, y2: usize) {
-    for x in x1..x2 + 1 {
-        for y in y1..y2 + 1 {
-            lights[x][y] = false;
+    for ls in lights.iter_mut().take(x2 + 1).skip(x1) {
+        for l in ls.iter_mut().take(y2 + 1).skip(y1) {
+            *l = false;
         }
     }
 }
 
 fn turn_on(lights: &mut [[bool; 1000]; 1000], x1: usize, y1: usize, x2: usize, y2: usize) {
-    for x in x1..x2 + 1 {
-        for y in y1..y2 + 1 {
-            lights[x][y] = true;
+    for ls in lights.iter_mut().take(x2 + 1).skip(x1) {
+        for l in ls.iter_mut().take(y2 + 1).skip(y1) {
+            *l = true;
         }
     }
 }
 
 fn toggle(lights: &mut [[bool; 1000]; 1000], x1: usize, y1: usize, x2: usize, y2: usize) {
-    for x in x1..x2 + 1 {
-        for y in y1..y2 + 1 {
-            lights[x][y] = !lights[x][y];
+    for ls in lights.iter_mut().take(x2 + 1).skip(x1) {
+        for l in ls.iter_mut().take(y2 + 1).skip(y1) {
+            *l = !*l;
         }
     }
 }
 
 fn dim(lights: &mut [[u32; 1000]; 1000], x1: usize, y1: usize, x2: usize, y2: usize) {
-    for x in x1..x2 + 1 {
-        for y in y1..y2 + 1 {
-            if lights[x][y] != 0 {
-                lights[x][y] -= 1;
+    for ls in lights.iter_mut().take(x2 + 1).skip(x1) {
+        for l in ls.iter_mut().take(y2 + 1).skip(y1) {
+            if *l != 0 {
+                *l -= 1;
             }
         }
     }
@@ -158,9 +158,9 @@ fn brighten(
     y2: usize,
     amount: u32,
 ) {
-    for x in x1..x2 + 1 {
-        for y in y1..y2 + 1 {
-            lights[x][y] += amount;
+    for ls in lights.iter_mut().take(x2 + 1).skip(x1) {
+        for l in ls.iter_mut().take(y2 + 1).skip(y1) {
+            *l += amount;
         }
     }
 }

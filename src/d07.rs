@@ -35,28 +35,28 @@ impl Rule {
             let mut s1 = operands.split(" RSHIFT ");
             let a = Wire::from_str(s1.next().unwrap());
             let b = Wire::from_str(s1.next().unwrap());
-            return Rule::RShift(a, b, target);
+            Rule::RShift(a, b, target)
         } else if operands.contains(" LSHIFT ") {
             let mut s1 = operands.split(" LSHIFT ");
             let a = Wire::from_str(s1.next().unwrap());
             let b = Wire::from_str(s1.next().unwrap());
-            return Rule::LShift(a, b, target);
+            Rule::LShift(a, b, target)
         } else if operands.contains(" AND ") {
             let mut s1 = operands.split(" AND ");
             let a = Wire::from_str(s1.next().unwrap());
             let b = Wire::from_str(s1.next().unwrap());
-            return Rule::AND(a, b, target);
+            Rule::AND(a, b, target)
         } else if operands.contains(" OR ") {
             let mut s1 = operands.split(" OR ");
             let a = Wire::from_str(s1.next().unwrap());
             let b = Wire::from_str(s1.next().unwrap());
-            return Rule::OR(a, b, target);
+            Rule::OR(a, b, target)
         } else if operands.contains("NOT ") {
             let s1 = operands.split("NOT ");
             let a = Wire::from_str(s1.last().unwrap());
-            return Rule::NOT(a, target);
+            Rule::NOT(a, target)
         } else {
-            return Rule::Signal(Wire::from_str(operands), target);
+            Rule::Signal(Wire::from_str(operands), target)
         }
     }
 }
@@ -87,44 +87,32 @@ impl Solution {
                 match rule {
                     Rule::Signal(source, target) => {
                         if let Some((s, t)) = self.lookup_two(source, target) {
-                            if !(self.solved.contains_key(&t)) {
-                                self.solved.insert(t, s);
-                            }
+                            self.solved.entry(t).or_insert(s);
                         }
                     }
                     Rule::NOT(source, target) => {
                         if let Some((s, t)) = self.lookup_two(source, target) {
-                            if !(self.solved.contains_key(&t)) {
-                                self.solved.insert(t, !s);
-                            }
+                            self.solved.entry(t).or_insert(!s);
                         }
                     }
                     Rule::AND(left, right, target) => {
                         if let Some((l, r, t)) = self.lookup_three(left, right, target) {
-                            if !(self.solved.contains_key(&t)) {
-                                self.solved.insert(t, l & r);
-                            }
+                            self.solved.entry(t).or_insert(l & r);
                         }
                     }
                     Rule::OR(left, right, target) => {
                         if let Some((l, r, t)) = self.lookup_three(left, right, target) {
-                            if !(self.solved.contains_key(&t)) {
-                                self.solved.insert(t, l | r);
-                            }
+                            self.solved.entry(t).or_insert(l | r);
                         }
                     }
                     Rule::LShift(left, right, target) => {
                         if let Some((l, r, t)) = self.lookup_three(left, right, target) {
-                            if !(self.solved.contains_key(&t)) {
-                                self.solved.insert(t, l << r);
-                            }
+                            self.solved.entry(t).or_insert(l << r);
                         }
                     }
                     Rule::RShift(left, right, target) => {
                         if let Some((l, r, t)) = self.lookup_three(left, right, target) {
-                            if !(self.solved.contains_key(&t)) {
-                                self.solved.insert(t, l >> r);
-                            }
+                            self.solved.entry(t).or_insert(l >> r);
                         }
                     }
                 }
@@ -158,7 +146,7 @@ impl Solution {
                     return None;
                 }
             }
-            return Some((lv, rv, t.clone()));
+            Some((lv, rv, t.clone()))
         } else {
             panic!("target must be a variable")
         }
@@ -178,7 +166,7 @@ impl Solution {
                 }
             }
 
-            return Some((sv, t.clone()));
+            Some((sv, t.clone()))
         } else {
             panic!("target must be a variable")
         }

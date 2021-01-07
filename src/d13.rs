@@ -101,7 +101,7 @@ pub fn part2(rules: &[SeatingRule]) -> i32 {
     for rule in &rule_map {
         println!("{:?}", rule);
     }
-    persons.insert(myself.clone());
+    persons.insert(myself);
 
     persons
         .iter()
