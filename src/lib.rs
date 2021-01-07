@@ -14,8 +14,9 @@ pub mod d05; // nice strings
 pub mod d06; // million light grid
 pub mod d07; // bitwise logic gates
 pub mod d08; // code vs string length
-pub mod d09; // tsp
+pub mod d09; // travelling salesman problem
 pub mod d13; // optimal seating arrangement
 pub mod d14; // reindeer olympics
+pub mod d15; // cookie recipe
 
 aoc_lib! { year = 2015 }
