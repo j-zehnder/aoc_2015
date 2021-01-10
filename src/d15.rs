@@ -46,7 +46,7 @@ pub fn part1(cookies: &[CookieData]) -> i32 {
     cookies
         .iter()
         .combinations_with_replacement(100)
-        .map(|recipe| score_cookie(recipe))
+        .map(score_cookie)
         .max()
         .unwrap()
 }
@@ -56,7 +56,7 @@ pub fn part2(cookies: &[CookieData]) -> i32 {
     cookies
         .iter()
         .combinations_with_replacement(100)
-        .map(|recipe| score_cookie_2(recipe))
+        .map(score_cookie_2)
         .max()
         .unwrap()
 }

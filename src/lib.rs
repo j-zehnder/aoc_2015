@@ -18,5 +18,8 @@ pub mod d09; // travelling salesman problem
 pub mod d13; // optimal seating arrangement
 pub mod d14; // reindeer olympics
 pub mod d15; // cookie recipe
+pub mod d16; // aunt sue matching
+pub mod d17; // knapsack problem
+pub mod d18; // game of life
 
 aoc_lib! { year = 2015 }
