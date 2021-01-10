@@ -21,5 +21,6 @@ pub mod d15; // cookie recipe
 pub mod d16; // aunt sue matching
 pub mod d17; // knapsack problem
 pub mod d18; // game of life
+pub mod d23; // a turing machine
 
 aoc_lib! { year = 2015 }
